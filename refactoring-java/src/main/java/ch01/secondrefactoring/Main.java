@@ -1,4 +1,4 @@
-package ch01.after;
+package ch01.secondrefactoring;
 
 public class Main {
     public static void main(String[] args) {

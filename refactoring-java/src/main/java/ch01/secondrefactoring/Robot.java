@@ -1,10 +1,10 @@
-package ch01.after;
+package ch01.secondrefactoring;
 
 public class Robot {
 
-    public static final int WALK = 0;
-    public static final int STOP = 1;
-    public static final int JUMP = 2;
+    public static final RobotCommand WALK = new RobotCommand("walk");
+    public static final RobotCommand STOP = new RobotCommand("stop");
+    public static final RobotCommand JUMP = new RobotCommand("jump");
 
     private final String _name;
 
@@ -12,7 +12,7 @@ public class Robot {
         _name = name;
     }
 
-    public void order(int command) {
+    public void order(RobotCommand command) {
         if (command == WALK) {
             System.out.println(_name + " walks.");
         } else if (command == STOP) {
