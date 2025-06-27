@@ -1,4 +1,4 @@
-package ch02.before.after;
+package ch02.before;
 
 public class Main {
     public static void main(String[] args) {

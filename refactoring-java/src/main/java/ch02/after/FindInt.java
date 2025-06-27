@@ -1,4 +1,4 @@
-package ch02.before.after;
+package ch02.after;
 
 public class FindInt {
 
