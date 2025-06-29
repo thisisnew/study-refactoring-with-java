@@ -1,12 +1,49 @@
 package ch09.after;
 
 public class Logger {
+
+    private enum State {
+        STOPPED {
+            @Override
+            public void start() {
+                System.out.println("** START LOGGING **");
+            }
+
+            @Override
+            public void stop() {
+                /*아무것도 하지 않음*/
+            }
+
+            @Override
+            public void log(String info) {
+                System.out.println("Ignoring: " + info);
+            }
+        },
+        LOGGING {
+            @Override
+            public void start() {
+                /*아무것도 하지 않음*/
+            }
+
+            @Override
+            public void stop() {
+                System.out.println("** STOP LOGGING **");
+            }
+
+            @Override
+            public void log(String info) {
+                System.out.println("Ignoring: " + info);
+            }
+        };
+
+        public abstract void start();
+        public abstract void stop();
+        public abstract void log(String info);
+    }
+
     private State _state;
     public Logger() {
-        setState(State.STATE_STOPPED);
-    }
-    public State getState() {
-        return _state;
+        setState(State.STOPPED);
     }
 
     public void setState(State state) {
@@ -14,43 +51,16 @@ public class Logger {
     }
 
     public void start() {
-        switch (getState()) {
-            case STATE_STOPPED:
-                System.out.println("** START LOGGING **");
-                setState(State.STATE_LOGGING);
-                break;
-            case STATE_LOGGING:
-                /*아무것도 하지 않음*/
-                break;
-            default:
-                System.out.println("Invalid state:"+ _state);
-        }
+        _state.start();
+        setState(State.LOGGING);
     }
 
     public void stop() {
-        switch (getState()) {
-            case STATE_STOPPED:
-                /*아무것도 하지 않음*/
-                break;
-            case STATE_LOGGING:
-                System.out.println("** STOP LOGGING **");
-                setState(State.STATE_STOPPED);
-                break;
-            default:
-                System.out.println("Invalid state:"+ _state);
-        }
+        _state.stop();
+        setState(State.STOPPED);
     }
 
     public void log(String info) {
-        switch (getState()) {
-            case STATE_STOPPED:
-                System.out.println("Ignoring: " + info);
-                break;
-            case STATE_LOGGING:
-                System.out.println("Logging: " + info);
-                break;
-            default:
-                System.out.println("Invalid state:"+ _state);
-        }
+        _state.log(info);
     }
 }
