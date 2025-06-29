@@ -13,10 +13,6 @@ public class Item {
         _price = price;
     }
 
-    public int getTypeCode() {
-        return _typeCode;
-    }
-
     public String getTitle() {
         return _title;
     }
@@ -26,6 +22,6 @@ public class Item {
     }
 
     public String toString() {
-        return "Item[type=" + _typeCode + ",title=" + _title + ",price=" + _price + "]";
+        return "Item[type=" + _itemType.getTypeCode() + ",title=" + _title + ",price=" + _price + "]";
     }
 }
