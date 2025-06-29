@@ -1,33 +1,23 @@
 package ch09.after;
 
 public class Logger {
-    public static final int STATE_STOPPED = 0;
-    public static final int STATE_LOGGING = 1;
     private State _state;
     public Logger() {
-        setState(STATE_STOPPED);
+        setState(State.STATE_STOPPED);
     }
-    public int getState() {
-        return _state.getTypeCode();
+    public State getState() {
+        return _state;
     }
 
-    public void setState(int state) {
-        switch (state) {
-            case STATE_STOPPED:
-                _state = new StateStopped();
-                break;
-            case STATE_LOGGING:
-                _state = new StateLogging();
-            default:
-                System.out.println("Invalid state:"+ _state);
-        }
+    public void setState(State state) {
+        this._state = state;
     }
 
     public void start() {
         switch (getState()) {
             case STATE_STOPPED:
                 System.out.println("** START LOGGING **");
-                setState(STATE_LOGGING);
+                setState(State.STATE_LOGGING);
                 break;
             case STATE_LOGGING:
                 /*아무것도 하지 않음*/
@@ -44,7 +34,7 @@ public class Logger {
                 break;
             case STATE_LOGGING:
                 System.out.println("** STOP LOGGING **");
-                setState(STATE_STOPPED);
+                setState(State.STATE_STOPPED);
                 break;
             default:
                 System.out.println("Invalid state:"+ _state);
