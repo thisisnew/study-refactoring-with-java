@@ -4,7 +4,7 @@ public class Item {
 
     public static final int TYPECODE_BOOK = 0;
     public static final int TYPECODE_DVD = 1;
-    public static final int TYPECODE_SOFTWARE = 0;
+    public static final int TYPECODE_SOFTWARE = 2;
 
     private final int _typeCode;
     private final String _title;
