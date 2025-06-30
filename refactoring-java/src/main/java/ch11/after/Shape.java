@@ -1,48 +1,35 @@
 package ch11.after;
 
-public class Shape {
-    public static final int TYPECODE_LINE = 0;
-    public static final int TYPECODE_RECTANGLE = 1;
-    public static final int TYPECODE_OVAL = 2;
+public abstract class Shape {
+    protected final int _startx;
+    protected final int _starty;
+    protected final int _endx;
+    protected final int _endy;
 
-    private final int _typeCode;
-    private final int _startx;
-    private final int _starty;
-    private final int _endx;
-    private final int _endy;
-
-    public static Shape create(int typeCode, int startx, int starty, int endx, int endy) {
-        return new Shape(typeCode, startx, starty, endx, endy);
+    public static Shape createLine(int startx, int starty, int endx, int endy) {
+        return new ShapeLine(startx, starty, endx, endy);
     }
 
-    private Shape(int typeCode,
-                 int startx,
-                 int starty,
-                 int endx,
-                 int endy) {
-        _typeCode = typeCode;
+    public static Shape createRectangle(int startx, int starty, int endx, int endy) {
+        return new ShapeRectangle(startx, starty, endx, endy);
+    }
+
+    public static Shape createOval(int startx, int starty, int endx, int endy) {
+        return new ShapeOval(startx, starty, endx, endy);
+    }
+
+    protected Shape(int startx,
+                    int starty,
+                    int endx,
+                    int endy) {
         _startx = startx;
         _starty = starty;
         _endx = endx;
         _endy = endy;
     }
 
-    public int getTypeCode() {
-        return _typeCode;
-    }
-
-    public String getName() {
-        switch (_typeCode) {
-            case TYPECODE_LINE:
-                return "LINE";
-            case TYPECODE_RECTANGLE:
-                return "RECTANGLE";
-            case TYPECODE_OVAL:
-                return "OVAL";
-            default:
-                return null;
-        }
-    }
+    public abstract String getName();
+    public abstract void draw();
 
     @Override
     public String toString() {
@@ -52,31 +39,5 @@ public class Shape {
                 ", _endx=" + _endx +
                 ", _endy=" + _endy +
                 ")]";
-    }
-
-    public void draw() {
-        switch (_typeCode) {
-            case TYPECODE_LINE:
-                drawLine();
-                break;
-            case TYPECODE_RECTANGLE:
-                drawRectangle();
-                break;
-            case TYPECODE_OVAL:
-                drawOval();
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void drawLine() {
-        System.out.println("drawLine" + this.toString());
-    }
-    private void drawRectangle() {
-        System.out.println("drawRectangle" + this.toString());
-    }
-    private void drawOval() {
-        System.out.println("drawOval" + this.toString());
     }
 }
