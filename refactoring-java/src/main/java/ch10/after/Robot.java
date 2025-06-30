@@ -1,8 +1,8 @@
 package ch10.after;
 
-import ch10.before.Command;
-import ch10.before.Direction;
-import ch10.before.Position;
+import ch10.after.Command;
+import ch10.after.Direction;
+import ch10.after.Position;
 
 import java.util.StringTokenizer;
 
@@ -28,21 +28,23 @@ public class Robot {
 
     public void executeCommand(String commandString) throws InvalidCommandException {
         Command command = Command.parseCommand(commandString);
-        executeCommand(command);
+        command.execute(this);
     }
 
-    public void executeCommand(Command command) throws InvalidCommandException {
-        if (command == Command.FORWARD) {
-            _position.relativeMove(_direction._x, _direction._y);
-        } else if (command == Command.BACKWARD) {
-            _position.relativeMove(-_direction._x, -_direction._y);
-        } else if (command == Command.TURN_LEFT) {
-            _direction.setDirection(_direction._y, -_direction._x);
-        } else if (command == Command.TURN_RIGHT) {
-            _direction.setDirection(-_direction._y, -_direction._x);
-        } else {
-            throw new InvalidCommandException();
-        }
+    public void forward() {
+        _position.relativeMove(_direction._x, _direction._y);
+    }
+
+    public void backward() {
+        _position.relativeMove(-_direction._x, _direction._y);
+    }
+
+    public void right() {
+        _direction.setDirection(_direction._y, -_direction._x);
+    }
+
+    public void left() {
+        _direction.setDirection(-_direction._y, _direction._x);
     }
 
     @Override
