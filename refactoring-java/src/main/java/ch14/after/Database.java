@@ -3,6 +3,7 @@ package ch14.after;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.Properties;
 
 public class Database {
@@ -28,7 +29,7 @@ public class Database {
         _properties.store(new FileOutputStream(_filename), "");
     }
 
-    public Properties getProperties() {
-        return _properties;
+    public Enumeration<?> keys() {
+        return _properties.propertyNames();
     }
 }
